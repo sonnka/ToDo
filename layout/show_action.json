@@ -1,0 +1,30 @@
+{
+  "body": [
+    {
+      "textLabelContainerMlc": {
+        "componentId": "text_label_container_1",
+        "parameters": [],
+        "text": "{{i18n 'home.body.text'}}"
+      }
+    }
+  ],
+  "bottomGroup": [
+    {
+      "bottomGroupOrg": {
+        "btnPrimaryDefaultCreate": {
+          "componentId": "btn_primary_default",
+          "label": "{{i18n 'home.button.create'}}",
+          "action": { "type": "{{userAction}}" },
+          "actions": []
+        },
+
+        "btnPrimaryDefaultList": {
+          "componentId": "btn_primary_default",
+          "label": "{{i18n 'home.button.list'}}",
+          "action": { "type": "{{userAction}}" },
+          "actions": []
+        }
+      }
+    }
+  ]
+}

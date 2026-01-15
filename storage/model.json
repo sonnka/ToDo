@@ -3,7 +3,7 @@
   "connectionId": "mongo:diia-card",
   "indexes": [
     { "field": "userIdentifier" },
-    { "field": "status" }
+    { "field": "type" }
   ],
   "timestamps": true,
   "version": true,
@@ -11,16 +11,13 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "additionalProperties": false,
-    "required": ["userIdentifier", "status"],
+    "required": ["userIdentifier", "type"],
     "properties": {
       "userIdentifier": { "type": "string" },
-      "title": { "type": "string" },
-      "text": { "type": "string" },
-      "status": {
+      "type": {
         "type": "string",
-        "enum": ["created", "active", "completed"]
-      },
-      "createdAt": { "type": "string", "format": "date-time" }
+        "enum": ["personal", "work"]
+      }
     }
   }
 }

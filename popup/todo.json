@@ -1,0 +1,13 @@
+[
+   {
+        "processCode": 135696,
+        "template": {
+            "type": "middleCenterAlignAlert",
+            "isClosable": false,
+            "data": {
+                "icon": "👍",
+                "title": "{{i18n 'success.text'}}"
+            }
+        }
+    }
+]

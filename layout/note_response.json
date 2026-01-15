@@ -1,0 +1,12 @@
+{
+    "body": [
+      {
+        "textLabelContainerMlc": {
+          "componentId": "text_label_container",
+          "parameters": [],
+          "text": "{{i18n 'note.body.response.text'}}"
+        }
+      }
+    ],
+    "bottomGroup": []
+  }

@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "titleLabelMlc": {
+        "label": "{{i18n 'note.body.list.text'}}"
+      }
+    },
+    {
+      "radioGroupMlc": {
+        "name": "noteId",
+        "options": "{{#each notes}}{ \"label\": \"{{this.type}}\", \"value\": \"{{this._id}}\" }{{/each}}"
+      }
+    }
+  ],
+  "bottomGroup": [
+    {
+      "bottomGroupOrg": {
+        "btnPrimaryDefaultAtm": {
+          "label": "Open Selected",
+          "action": { "type": "submit" }
+        }
+      }
+    }
+  ]
+}

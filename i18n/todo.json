@@ -1,7 +1,13 @@
 {
-  "btn.home": "На головну",
+  "home.body.text" : "Оберіть, будь ласка, дію:",
+  "home.button.list" : "Переглянути список нотаток",
+  "home.button.create" : "Створити нотатку",
+  "note.body.text" : "Обреіть, будь ласка, тип нотатки:",
+  "note.body.personal" : "Персональна",
+  "note.body.work" : "Робоча",
+  "note.body.list.text" : "Обреіть, будь ласка, тип нотаткияку хочете переглянути:",
+  "note.body.response.text" : "Інформація про нотатку\n ...",
+  "note.body.response.button.archive" : "Архівувати",
   "success.title": "Успіх!",
-  "success.text": "Тест пройдено",
-  "error.general.title": "Помилка",
-  "error.general.text": "Щось пішло не так"
+  "success.text": "Тест пройдено"
 }

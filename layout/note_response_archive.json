@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "textLabelContainerMlc": {
+        "componentId": "text_label_container",
+        "parameters": [],
+        "text": "{{i18n 'note.body.response.text'}}"
+      }
+    }
+  ],
+  "bottomGroup": [
+    {
+      "bottomGroupOrg": {
+        "btnPrimaryDefaultAtm": {
+          "componentId": "btn_primary_default",
+          "label": "{{i18n 'note.body.response.button.archive'}}",
+          "action": { "type": "{{noteArchive}}" },
+          "actions": []
+        }
+      }
+    }
+  ]
+}
