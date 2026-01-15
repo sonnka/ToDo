@@ -1,0 +1,26 @@
+{
+  "container": "noteapplication",
+  "connectionId": "mongo:diia-card",
+  "indexes": [
+    { "field": "userIdentifier" },
+    { "field": "status" }
+  ],
+  "timestamps": true,
+  "version": true,
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["userIdentifier", "status"],
+    "properties": {
+      "userIdentifier": { "type": "string" },
+      "title": { "type": "string" },
+      "text": { "type": "string" },
+      "status": {
+        "type": "string",
+        "enum": ["created", "active", "completed"]
+      },
+      "createdAt": { "type": "string", "format": "date-time" }
+    }
+  }
+}

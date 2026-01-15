@@ -1,0 +1,5 @@
+<DiiaService>
+    <name>todo</name>
+    <mainProcess>todo.bpmn</mainProcess>
+    <displayName>ToDo</displayName>
+</DiiaService>

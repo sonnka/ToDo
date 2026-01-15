@@ -1,0 +1,21 @@
+{
+  "body": [
+    {
+      "statusMessageMlc": {
+        "icon": "✅",
+        "title": "{{i18n 'success.title'}}",
+        "text": "{{i18n 'success.text'}}"
+      }
+    }
+  ],
+  "bottomGroup": [
+    {
+      "bottomGroupOrg": {
+        "btnPrimaryDefaultAtm": {
+          "label": "{{i18n 'btn.home'}}",
+          "action": { "type": "home" }
+        }
+      }
+    }
+  ]
+}
