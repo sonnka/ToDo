@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1d2hcmz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
-  <bpmn:process id="Process_0gjrx3e" isExecutable="true" camunda:historyTimeToLive="180">
+  <bpmn:process id="todo" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_145o057</bpmn:outgoing>
     </bpmn:startEvent>
@@ -34,7 +34,7 @@
         <camunda:inputOutput>
           <camunda:outputParameter name="notes_count">${count}</camunda:outputParameter>
         </camunda:inputOutput>
-        <camunda:field name="dBConnection">
+        <camunda:field name="dbConnection">
           <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
@@ -68,7 +68,7 @@
     <bpmn:serviceTask id="Activity_07ti1ky" name="fetch note by id" camunda:class="ua.gov.diia.builder.engine.bpmn.task.db.FindOneEntity">
       <bpmn:extensionElements>
         <camunda:field name="dbConnection">
-          <camunda:string>${MONGO_URL}</camunda:string>
+          <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
           <camunda:string>noteapplication</camunda:string>
@@ -118,7 +118,7 @@
     <bpmn:serviceTask id="Activity_19ecnf7" name="update note status to archive" camunda:class="ua.gov.diia.builder.engine.bpmn.task.db.UpdateOneEntity">
       <bpmn:extensionElements>
         <camunda:field name="dbConnection">
-          <camunda:string>${MONGO_URL}</camunda:string>
+          <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
           <camunda:string>noteapplication</camunda:string>
@@ -129,8 +129,8 @@
         <camunda:field name="updateExpression">
           <camunda:expression>[
   {
-    "field": "noteId",
-    "value": "${noteId}",
+    "field": "noteStatus",
+    "value": "archive",
     "operator": "SET"
   }
 ]</camunda:expression>
@@ -151,7 +151,7 @@
     <bpmn:userTask id="Activity_0qsgher" name="select note type for new note">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="outLaout">show_note_type</camunda:inputParameter>
+          <camunda:inputParameter name="outLayout">show_note_type</camunda:inputParameter>
           <camunda:inputParameter name="inSchema">note_type</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
@@ -162,17 +162,22 @@
     <bpmn:serviceTask id="Activity_0abx2cb" name="save new note" camunda:class="ua.gov.diia.builder.engine.bpmn.task.db.PersistEntity">
       <bpmn:extensionElements>
         <camunda:field name="dbConnection">
-          <camunda:string>${MONGO_URL}</camunda:string>
+          <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
           <camunda:string>noteapplication</camunda:string>
         </camunda:field>
         <camunda:field name="entity">
-          <camunda:string>{
+          <camunda:expression>{
   "userIdentifier": "${userId}",
   "noteType": "work"
-}</camunda:string>
+}</camunda:expression>
         </camunda:field>
+		
+		<camunda:inputOutput>
+      <camunda:outputParameter name="noteId">${insertionId}</camunda:outputParameter>
+    </camunda:inputOutput>
+	
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1627mc5</bpmn:incoming>
       <bpmn:outgoing>Flow_1ozd8vp</bpmn:outgoing>
@@ -180,7 +185,7 @@
     <bpmn:serviceTask id="Activity_17d5dro" name="fetch note by id" camunda:class="ua.gov.diia.builder.engine.bpmn.task.db.FindOneEntity">
       <bpmn:extensionElements>
         <camunda:field name="dbConnection">
-          <camunda:string>${MONGO_URL}</camunda:string>
+          <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
           <camunda:string>noteapplication</camunda:string>
@@ -233,7 +238,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1hlfj9d" sourceRef="Activity_19ecnf7" targetRef="Gateway_030uq4l" />
     <bpmn:sequenceFlow id="Flow_1bsqtip" name="yes" sourceRef="Gateway_030uq4l" targetRef="Activity_17d5dro">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="feel">note.id!= null</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="feel">note._id!= null</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1x0z2ui" name="no" sourceRef="Gateway_030uq4l" targetRef="Event_0uk03nm" />
     <bpmn:exclusiveGateway id="Gateway_1chplse" name="note exists" default="Flow_0e8hvpz">
@@ -265,7 +270,7 @@
     <bpmn:serviceTask id="Activity_1wpuwzj" name="fetch notes" camunda:class="ua.gov.diia.builder.engine.bpmn.task.db.LoadEntities">
       <bpmn:extensionElements>
         <camunda:field name="dbConnection">
-          <camunda:string>${MONGO_URL}</camunda:string>
+          <camunda:expression>${MONGO_URL}</camunda:expression>
         </camunda:field>
         <camunda:field name="container">
           <camunda:string>noteapplication</camunda:string>
@@ -293,7 +298,7 @@
   <bpmn:error id="Error_1gkqedy" name="note_is_null" errorCode="note_is_null" />
   <bpmn:error id="Error_1qq57hv" name="Error_1d5kthq" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0gjrx3e">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="todo">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="172" y="172" width="36" height="36" />
       </bpmndi:BPMNShape>
